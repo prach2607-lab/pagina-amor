@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Para ti 💖</title>
+
+<!-- Fuente elegante tipo Westchester -->
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #ff758c, #ff7eb3);
+    overflow: hidden;
+    color: white;
+}
+
+/* Contenedor principal */
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100vh;
+    padding: 40px;
+}
+
+/* Caja izquierda */
+.text-box {
+    max-width: 500px;
+    backdrop-filter: blur(15px);
+    background: rgba(255,255,255,0.2);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+/* Título */
+h1 {
+    font-family: 'Great Vibes', cursive; /* estilo romántico */
+    font-size: 50px;
+}
+
+/* Texto */
+p {
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+/* Input */
+input {
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    margin-top: 10px;
+}
+
+/* Botón */
+button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    background: #ff4b5c;
+    color: white;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+/* Carrusel DERECHA */
+.carousel {
+    width: 400px;
+    height: 75vh;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.carousel img {
+    position: absolute;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
+.carousel img.active {
+    opacity: 1;
+}
+
+/* Corazones */
+.heart {
+    position: fixed;
+    bottom: -20px;
+    color: red;
+    animation: subir 5s linear infinite;
+}
+
+@keyframes subir {
+    100% { transform: translateY(-110vh); }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container" id="contenido">
+    <div class="text-box">
+        <h1>💌 Acceso secreto</h1>
+        <input type="password" id="pass" placeholder="Contraseña">
+        <br>
+        <button onclick="verificar()">Entrar</button>
+    </div>
+</div>
+
+<script>
+function verificar() {
+    let pass = document.getElementById("pass").value;
+
+    if (pass === "Ane") {
+        document.getElementById("contenido").innerHTML = `
+        
+        <div class="text-box">
+            <h1>Para ti 💖</h1>
+            <p>
+            hola, mi amor, esta pagina o archivo, como lo quieras llamar fue hecho con el único fin de decirte que te amo demasiado mi vida. 
+            Eres una chica maravillosa e incomparable, la unica en llenar mis mañanas de alegria. 
+            te recuerdo que mi amor hacia a ti es incondicional, y deseo que todas nuestras metas se cumplan, 
+            y quiero, deseo anhelo que las cumplamos juntos hasta el fin de nuestros dias :3
+            </p>
+        </div>
+
+        <div class="carousel">
+            <img src="foto1.jpg" class="active">
+            <img src="foto2.jpg">
+            <img src="foto3.jpg">
+        </div>
+        `;
+
+        iniciarCarrusel();
+    } else {
+        alert("Contraseña incorrecta 😢");
+    }
+}
+
+// carrusel automático
+function iniciarCarrusel() {
+    let index = 0;
+    const imagenes = document.querySelectorAll(".carousel img");
+
+    setInterval(() => {
+        imagenes[index].classList.remove("active");
+        index = (index + 1) % imagenes.length;
+        imagenes[index].classList.add("active");
+    }, 3000);
+}
+
+// corazones
+function crearCorazon() {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (Math.random() * 20 + 10) + "px";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 5000);
+}
+
+setInterval(crearCorazon, 300);
+</script>
+
+</body>
+</html>
