@@ -15,7 +15,7 @@ body {
     color: white;
 }
 
-/* Contenedor */
+/* Layout */
 .container {
     display: flex;
     justify-content: space-between;
@@ -24,7 +24,7 @@ body {
     padding: 40px;
 }
 
-/* Caja texto */
+/* Caja */
 .text-box {
     max-width: 500px;
     backdrop-filter: blur(15px);
@@ -40,23 +40,10 @@ h1 {
     font-size: 50px;
 }
 
-/* Texto */
-p {
-    font-size: 18px;
-    line-height: 1.6;
-}
-
-/* Input */
-input {
-    padding: 12px;
-    border-radius: 8px;
-    border: none;
-    margin-top: 10px;
-}
-
 /* Botón */
-button {
-    padding: 12px 25px;
+.menu-btn {
+    margin-top: 10px;
+    padding: 10px 20px;
     border: none;
     border-radius: 8px;
     background: #ff4b5c;
@@ -64,7 +51,7 @@ button {
     cursor: pointer;
 }
 
-/* Carrusel */
+/* Carrusel base */
 .carousel {
     width: 400px;
     height: 75vh;
@@ -78,16 +65,28 @@ button {
     position: absolute;
     max-width: 100%;
     max-height: 100%;
-    width: auto;
-    height: auto;
     opacity: 0;
-    transition: opacity 1s ease-in-out;
     border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
 }
 
-.carousel img.active {
+/* Animación 1 (normal) */
+.fade img {
+    transition: opacity 1s;
+}
+
+.fade img.active {
     opacity: 1;
+}
+
+/* Animación 2 (zoom + fade) */
+.zoom img {
+    transition: opacity 1s, transform 3s;
+    transform: scale(1.1);
+}
+
+.zoom img.active {
+    opacity: 1;
+    transform: scale(1);
 }
 
 /* Corazones */
@@ -106,57 +105,85 @@ button {
 
 <body>
 
-<!-- 🎵 MÚSICA -->
-<audio id="musica" loop>
-    <source src="musica.mp3" type="audio/mpeg">
-</audio>
-
 <div class="container" id="contenido">
     <div class="text-box">
         <h1>💌 Acceso secreto</h1>
         <input type="password" id="pass" placeholder="Contraseña">
         <br>
-        <button onclick="verificar()">Entrar</button>
+        <button class="menu-btn" onclick="verificar()">Entrar</button>
     </div>
 </div>
 
 <script>
 function verificar() {
     let pass = document.getElementById("pass").value;
-
     if (pass === "Ane") {
-
-        // 🎵 activar música
-        setTimeout(() => {
-            document.getElementById("musica").play();
-        }, 500);
-
-        document.getElementById("contenido").innerHTML = `
-        
-        <div class="text-box">
-            <h1>Para ti 💖</h1>
-            <p>
-            hola, mi amor, esta pagina o archivo, como lo quieras llamar fue hecho con el único fin de decirte que te amo demasiado mi vida. 
-            Eres una chica maravillosa e incomparable, la unica en llenar mis mañanas de alegria. 
-            te recuerdo que mi amor hacia a ti es incondicional, y deseo que todas nuestras metas se cumplan, 
-            y quiero, deseo anhelo que las cumplamos juntos hasta el fin de nuestros dias :3
-            </p>
-        </div>
-
-        <div class="carousel">
-            <img src="foto1.jpg" class="active">
-            <img src="foto2.jpg">
-            <img src="foto3.jpg">
-        </div>
-        `;
-
-        iniciarCarrusel();
+        cargarPagina1();
     } else {
         alert("Contraseña incorrecta 😢");
     }
 }
 
-// carrusel automático
+/* PAGINA 1 */
+function cargarPagina1() {
+    document.getElementById("contenido").innerHTML = `
+    <div class="text-box">
+        <h1>Para ti 💖</h1>
+        <p>
+        hola, mi amor, esta pagina o archivo, como lo quieras llamar fue hecho con el único fin de decirte que te amo demasiado mi vida. 
+        Eres una chica maravillosa e incomparable, la unica en llenar mis mañanas de alegria. 
+        te recuerdo que mi amor hacia a ti es incondicional, y deseo que todas nuestras metas se cumplan, 
+        y quiero, deseo anhelo que las cumplamos juntos hasta el fin de nuestros dias :3
+        </p>
+
+        <button class="menu-btn" onclick="cargarPagina2()">Ver más 💌</button>
+    </div>
+
+    <div class="carousel fade">
+        <img src="foto1.jpg" class="active">
+        <img src="foto2.jpg">
+        <img src="foto3.jpg">
+    </div>
+    `;
+    iniciarCarrusel();
+}
+
+/* PAGINA 2 (ANIMACIÓN DIFERENTE) */
+function cargarPagina2() {
+    document.getElementById("contenido").innerHTML = `
+    <div class="text-box">
+        <h1>Un poquito más 💖</h1>
+        <p>
+        hola mi niña, ¿Cómo estas ? espero que bien, bueño, en esta pagina, esta escrita con el fin, de hacerte saber lo mucho que te extraño cada día. 
+        BUENO, en si por aca quiero expresarme  y decirte todo lo que siento, y los voy a ir actualizando.<br><br>
+
+        Anelhy, ya no solo te quiero en mi vida, te necesito en ella, no lo quería aceptar pero en inevitable, yo ya no puedo imaginar una vida donde tu no estés, 
+        y eso me alegra, por que tu me haces feliz, y espero seguir viviendo esta felicidad a tu lado, no, no solo lo espero, es lo que quiero, 
+        quiero llegar a vivir toda mi vida junto a ti.<br><br>
+
+        Quizás para ti sea poco tiempo y consideres apresurada esa idea, pero para mi este tiempo es mas que suficiente para saber lo que siento por ti 
+        y todo lo que quiero para nosotros.<br><br>
+
+        Y lo que quiero es seguir viviendo nuevos momentos felices a tu lado, quiero que te sientas feliz a mi lado.<br><br>
+
+        te amo y amo cada parte de mi amor, amo absolutamente todo de ti<br><br>
+
+        ATT: tu negro 💖
+        </p>
+
+        <button class="menu-btn" onclick="cargarPagina1()">Volver 🔙</button>
+    </div>
+
+    <div class="carousel zoom">
+        <img src="foto4.jpg" class="active">
+        <img src="foto5.jpg">
+        <img src="foto6.jpg">
+    </div>
+    `;
+    iniciarCarrusel();
+}
+
+/* Carrusel */
 function iniciarCarrusel() {
     let index = 0;
     const imagenes = document.querySelectorAll(".carousel img");
@@ -168,7 +195,7 @@ function iniciarCarrusel() {
     }, 3000);
 }
 
-// corazones
+/* Corazones */
 function crearCorazon() {
     const heart = document.createElement("div");
     heart.classList.add("heart");
