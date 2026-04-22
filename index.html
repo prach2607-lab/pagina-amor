@@ -11,11 +11,10 @@ body {
     margin: 0;
     font-family: 'Poppins', sans-serif;
     background: linear-gradient(135deg, #ff758c, #ff7eb3);
-    overflow-x: hidden; /* 🔥 corregido */
+    overflow-x: hidden;
     color: white;
 }
 
-/* Layout */
 .container {
     display: flex;
     justify-content: space-between;
@@ -26,24 +25,22 @@ body {
 
 .text-box {
     max-width: 500px;
-    backdrop-filter: blur(15px);
     background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(15px);
     padding: 30px;
     border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     overflow-y: auto;
     max-height: 80vh;
-    position: relative;
-    z-index: 2;
 }
 
 h1 {
     font-family: 'Great Vibes', cursive;
     font-size: 50px;
+    text-align: center;
 }
 
 .menu-btn {
-    margin-top: 10px;
+    margin-top: 15px;
     padding: 10px 20px;
     border: none;
     border-radius: 8px;
@@ -57,7 +54,6 @@ h1 {
     width: 400px;
     height: 75vh;
     position: relative;
-    z-index: 2;
 }
 
 .carousel img {
@@ -115,38 +111,17 @@ h1 {
     to { transform: rotateX(-180deg); }
 }
 
-/* TE AMO */
-.teamo {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0);
-    font-size: 80px;
+/* FINAL */
+.final-love {
+    font-size: 100px;
+    text-align: center;
+    width: 100%;
     font-family: 'Great Vibes', cursive;
-    animation: aparecer 2s forwards, latido 1s infinite 2s;
-    z-index: 3;
+    animation: latido 1s infinite;
 }
 
-@keyframes aparecer {
-    to { transform: translate(-50%, -50%) scale(1); }
-}
 @keyframes latido {
-    50% { transform: translate(-50%, -50%) scale(1.1); }
-}
-
-/* ❤️ Corazones (ARREGLADO) */
-.heart {
-    position: fixed;
-    bottom: -20px;
-    color: red;
-    animation: subir 5s linear infinite;
-    pointer-events: none;
-    z-index: 1;
-}
-
-@keyframes subir {
-    0% { transform: translateY(0) scale(1); opacity: 1; }
-    100% { transform: translateY(-110vh) scale(1.5); opacity: 0; }
+    50% { transform: scale(1.1); }
 }
 </style>
 </head>
@@ -168,6 +143,7 @@ function verificar() {
     }
 }
 
+/* Carta */
 function animarCarta() {
     document.body.innerHTML += `
     <div class="carta-container">
@@ -175,8 +151,18 @@ function animarCarta() {
     </div>`;
     setTimeout(() => {
         document.querySelector(".carta-container").remove();
-        cargarPagina1();
+        paginaIntro();
     }, 2000);
+}
+
+/* INTRO */
+function paginaIntro() {
+document.getElementById("contenido").innerHTML = `
+<div class="text-box">
+<h1 style="font-size:60px;">PARA TI:<br>MY ONLY LOVE 💖</h1>
+<button class="menu-btn" onclick="cargarPagina1()">Entrar</button>
+</div>
+`;
 }
 
 /* PAGINA 1 */
@@ -269,6 +255,7 @@ Gracias por existir y por quedarte conmigo.
 </p>
 
 <button class="menu-btn" onclick="cargarPagina2()">Volver</button>
+<button class="menu-btn" onclick="paginaFinal()">Final 💖</button>
 </div>
 
 <div class="carousel slide">
@@ -276,10 +263,17 @@ Gracias por existir y por quedarte conmigo.
 <img src="foto8.jpg">
 <img src="foto9.jpg">
 </div>
-
-<div class="teamo">TE AMO 💖</div>
 `;
 iniciarCarrusel();
+}
+
+/* FINAL */
+function paginaFinal() {
+document.getElementById("contenido").innerHTML = `
+<div style="width:100%;">
+<h1 class="final-love">TE AMO 💖</h1>
+</div>
+`;
 }
 
 /* Carrusel */
@@ -292,19 +286,6 @@ setInterval(() => {
     imgs[i].classList.add("active");
 }, 3000);
 }
-
-/* ❤️ Corazones */
-function crearCorazon() {
-    const heart = document.createElement("div");
-    heart.classList.add("heart");
-    heart.innerHTML = "❤️";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.fontSize = (Math.random() * 20 + 10) + "px";
-    document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 5000);
-}
-
-setInterval(crearCorazon, 300);
 </script>
 
 </body>
