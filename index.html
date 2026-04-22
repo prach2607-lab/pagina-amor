@@ -15,6 +15,7 @@ body {
     color: white;
 }
 
+/* Layout */
 .container {
     display: flex;
     justify-content: space-between;
@@ -32,6 +33,8 @@ body {
     box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     overflow-y: auto;
     max-height: 80vh;
+    position: relative;
+    z-index: 2;
 }
 
 h1 {
@@ -54,6 +57,7 @@ h1 {
     width: 400px;
     height: 75vh;
     position: relative;
+    z-index: 2;
 }
 
 .carousel img {
@@ -64,6 +68,7 @@ h1 {
     border-radius: 20px;
 }
 
+/* Animaciones carrusel */
 .fade img { transition: opacity 1s; }
 .fade img.active { opacity: 1; }
 
@@ -120,6 +125,7 @@ h1 {
     font-size: 80px;
     font-family: 'Great Vibes', cursive;
     animation: aparecer 2s forwards, latido 1s infinite 2s;
+    z-index: 3;
 }
 
 @keyframes aparecer {
@@ -127,6 +133,21 @@ h1 {
 }
 @keyframes latido {
     50% { transform: translate(-50%, -50%) scale(1.1); }
+}
+
+/* ❤️ Corazones */
+.heart {
+    position: fixed;
+    bottom: -20px;
+    color: rgba(255,255,255,0.8);
+    animation: subir 5s linear infinite;
+    pointer-events: none;
+    z-index: 0;
+}
+
+@keyframes subir {
+    0% { transform: translateY(0) scale(1); opacity: 1; }
+    100% { transform: translateY(-110vh) scale(1.5); opacity: 0; }
 }
 </style>
 </head>
@@ -182,38 +203,25 @@ y quiero, deseo anhelo que las cumplamos juntos hasta el fin de nuestros dias :3
 iniciarCarrusel();
 }
 
-/* PAGINA 2 (COMPLETO) */
+/* PAGINA 2 */
 function cargarPagina2() {
 document.getElementById("contenido").innerHTML = `
 <div class="text-box">
 <h1>Un poquito más 💖</h1>
 <p>
 hola mi niña, ¿Cómo estas ? espero que bien,<br><br>
-
 bueño, en esta pagina, esta escrita con el fin, de hacerte saber lo mucho que te extraño cada día.<br><br>
-
 BUENO, en si por aca quiero expresarme y decirte todo lo que siento, y los voy a ir actualizando.<br><br>
-
 Anelhy, ya no solo te quiero en mi vida, te necesito en ella, no lo quería aceptar pero en inevitable,<br><br>
-
 yo ya no puedo imaginar una vida donde tu no estés, y eso me alegra, por que tu me haces feliz,<br><br>
-
 y espero seguir viviendo esta felicidad a tu lado, no, no solo lo espero, es lo que quiero,<br><br>
-
 quiero llegar a vivir toda mi vida junto a ti.<br><br>
-
 Quizás para ti sea poco tiempo y consideres apresurada esa idea,<br><br>
-
 pero para mi este tiempo es mas que suficiente para mi para saber lo que siento por ti<br><br>
-
 y todo lo que quiero para nosotros.<br><br>
-
 Y lo que quiero es seguir viviendo nuevos momentos felices a tu lado,<br><br>
-
 quiero que te sientas feliz a mi lado.<br><br>
-
 te amo y amo cada parte de mi amor, amo absolutamente todo de ti.<br><br>
-
 ATT: tu negro
 </p>
 
@@ -230,56 +238,34 @@ ATT: tu negro
 iniciarCarrusel();
 }
 
-/* PAGINA 3 (COMPLETO) */
+/* PAGINA 3 */
 function cargarPagina3() {
 document.getElementById("contenido").innerHTML = `
 <div class="text-box">
 <h1>Para nosotros 💖</h1>
 <p>
 HOLAAAAA MI AMOR,<br><br>
-
 ¿Qué se siente ser la mujer mas bella, hermosa, guapa, preciosota, de este fucking mundo?<br><br>
-
 porque lo eres mi amor, estas pero bien guapota.<br><br>
-
 brillas tanto que hasta la luna e tiene envidia.<br><br>
-
 Bueño, son cosas que ya tu sabe mi amol.<br><br>
-
 No solo eres hermosa mi amor también.<br><br>
-
 Eres la calma que aparece cuando todo en mí hace ruido.<br><br>
-
 Aprecio todos y cada uno de los momentos que paso junto a ti mi amor,<br><br>
-
 tu voz tiene algo que me desarma y me reconstruye al mismo tiempo.<br><br>
-
 Amo cada cosa de ti mi amor, desde tus besos, tus caricias, tus abrazos,<br><br>
-
 hasta la forma de como te ríes, tus vulgaridades que se complementan conmigo,<br><br>
-
 cada aspecto es especial para mi.<br><br>
-
 no necesito nada más, si te tengo a ti.<br><br>
-
 Eres los mejor de mi vida,<br><br>
-
 me encantas hoy, mañana y todos los días que vengan.<br><br>
-
 Estas en todos y cada uno de mis pensamientos,<br><br>
-
 tanto que mi cerebro ya se pregunta que ¿cuando te vas a cansar ?<br><br>
-
 de dar vueltas por mi cabeza.<br><br>
-
 Te siento tanto, que mi corazón empezó a bombear mas fuerte.<br><br>
-
 Eres y quiero que sigas siendo la razón de mis impulsos de cariño,<br><br>
-
 que todo lo que tenga que dar sea para ti.<br><br>
-
 TE AMOO 💖<br><br>
-
 Gracias por existir y por quedarte conmigo.
 </p>
 
@@ -307,6 +293,18 @@ setInterval(() => {
     imgs[i].classList.add("active");
 }, 3000);
 }
+
+/* ❤️ Corazones */
+function crearCorazon() {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (Math.random() * 20 + 10) + "px";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 5000);
+}
+setInterval(crearCorazon, 300);
 </script>
 
 </body>
