@@ -15,12 +15,36 @@ body {
     color: white;
 }
 
+/* Fondo corazones */
+#hearts-container {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.heart {
+    position: absolute;
+    bottom: -30px;
+    color: rgba(255,255,255,0.75);
+    animation: subir 7s linear forwards;
+}
+
+@keyframes subir {
+    0% { transform: translateY(0) scale(1); opacity: 0; }
+    15% { opacity: 1; }
+    100% { transform: translateY(-120vh) scale(1.6); opacity: 0; }
+}
+
 .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 100vh;
     padding: 40px;
+    position: relative;
+    z-index: 2;
 }
 
 .text-box {
@@ -31,6 +55,7 @@ body {
     border-radius: 20px;
     overflow-y: auto;
     max-height: 80vh;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
 }
 
 h1 {
@@ -47,9 +72,9 @@ h1 {
     background: #ff4b5c;
     color: white;
     cursor: pointer;
+    margin-right: 10px;
 }
 
-/* Carrusel */
 .carousel {
     width: 400px;
     height: 75vh;
@@ -91,6 +116,7 @@ h1 {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    z-index: 5;
 }
 
 .carta {
@@ -111,7 +137,38 @@ h1 {
     to { transform: rotateX(-180deg); }
 }
 
-/* FINAL */
+/* Página 4 especial */
+.gallery-wrap {
+    width: 420px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.memory-card {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+    animation: revealCard 1s ease forwards;
+}
+
+.memory-card:nth-child(1) { animation-delay: 0.3s; }
+.memory-card:nth-child(2) { animation-delay: 0.8s; }
+.memory-card:nth-child(3) { animation-delay: 1.3s; }
+
+.memory-card img {
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+}
+
+@keyframes revealCard {
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Final */
 .final-love {
     font-size: 100px;
     text-align: center;
@@ -127,6 +184,8 @@ h1 {
 </head>
 
 <body>
+
+<div id="hearts-container"></div>
 
 <div class="container" id="contenido">
     <div class="text-box">
@@ -255,7 +314,7 @@ Gracias por existir y por quedarte conmigo.
 </p>
 
 <button class="menu-btn" onclick="cargarPagina2()">Volver</button>
-<button class="menu-btn" onclick="paginaFinal()">Final 💖</button>
+<button class="menu-btn" onclick="cargarPagina4()">Ver más 💖</button>
 </div>
 
 <div class="carousel slide">
@@ -265,6 +324,44 @@ Gracias por existir y por quedarte conmigo.
 </div>
 `;
 iniciarCarrusel();
+}
+
+/* PAGINA 4 */
+function cargarPagina4() {
+document.getElementById("contenido").innerHTML = `
+<div class="text-box">
+<h1>Mi amor 💖</h1>
+<p>
+Amor, quiero que sepas que te amo demasiado, más de lo que a veces puedo explicar con palabras.<br><br>
+Estos cuatro meses contigo han sido de los más bonitos que me ha regalado la vida,<br><br>
+porque a tu lado todo se siente más especial, más tranquilo y más feliz.<br><br>
+Contigo la paso increíble, y cada momento que compartimos se queda guardado en mí de una forma muy bonita.<br><br>
+Quiero que siempre te sientas segura a mi lado,<br><br>
+que en mí encuentres paz, amor y un lugar bonito donde puedas quedarte sin miedo.<br><br>
+Quiero ser ese abrazo que te calme,<br><br>
+esa compañía que te haga sentir querida y esa persona con la que siempre puedas contar.<br><br>
+Lo nuestro no es algo pasajero, porque yo te amo con el corazón firme.<br><br>
+Siento que lo nuestro va más allá del tiempo,<br><br>
+más allá de cualquier dificultad, incluso más allá de esta vida.<br><br>
+Mi amor por ti es inquebrantable, sincero y profundo,<br><br>
+y no importa lo que pase, siempre va a seguir eligiéndote a ti.<br><br>
+Lo único que quiero es verte feliz,<br><br>
+verte sonreír y saber que esa sonrisa también encuentra un hogar en mí.<br><br>
+Quiero seguir compartiendo mi vida contigo,<br><br>
+seguir construyendo recuerdos hermosos y seguir amándote con la misma fuerza,<br><br>
+o incluso más, cada día.
+</p>
+
+<button class="menu-btn" onclick="cargarPagina3()">Volver</button>
+<button class="menu-btn" onclick="paginaFinal()">Final 💖</button>
+</div>
+
+<div class="gallery-wrap">
+    <div class="memory-card"><img src="foto10.jpg"></div>
+    <div class="memory-card"><img src="foto11.jpg"></div>
+    <div class="memory-card"><img src="foto12.jpg"></div>
+</div>
+`;
 }
 
 /* FINAL */
@@ -286,6 +383,19 @@ setInterval(() => {
     imgs[i].classList.add("active");
 }, 3000);
 }
+
+/* Corazones */
+function crearCorazon() {
+    const container = document.getElementById("hearts-container");
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "❤";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (Math.random() * 18 + 12) + "px";
+    container.appendChild(heart);
+    setTimeout(() => heart.remove(), 7000);
+}
+setInterval(crearCorazon, 300);
 </script>
 
 </body>
